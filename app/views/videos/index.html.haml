@@ -2,5 +2,8 @@
   .video.row
     - @videos.each do |video|
       .video.span2
-        = link_to "", video, nil do
-          %img(src="#{video.cover_image_url}")
+        .ul
+          .li
+            = link_to video_path(video) do
+              %br
+              = image_tag(video.cover_image_url, size: "160x120")
