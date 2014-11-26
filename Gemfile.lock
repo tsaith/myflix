@@ -125,6 +125,7 @@ GEM
       sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0)
     slop (3.4.7)
+    sluggable_th (0.0.0)
     sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -168,5 +169,6 @@ DEPENDENCIES
   rails_12factor
   rspec-rails (= 2.99)
   sass-rails
+  sluggable_th
   thin
   uglifier

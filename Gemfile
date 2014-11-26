@@ -9,6 +9,7 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'pg'
+gem 'sluggable_th' # Set up slugs
 
 group :development do
   gem 'thin'
