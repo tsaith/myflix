@@ -1,0 +1,8 @@
+- @categories.each do |category|
+  .ul
+    .li
+      = link_to category.name, category_path(category)
+      %br
+      - category.videos.each do |video|
+        = link_to video_path(video) do
+          = image_tag(video.cover_image_url, size: "160x120")
