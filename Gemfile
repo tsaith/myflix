@@ -15,6 +15,8 @@ group :development do
   gem 'thin'
   gem "better_errors"
   gem "binding_of_caller"
+  gem 'guard', '2.6.1'
+  gem 'guard-livereload', '2.3.1'
 end
 
 group :development, :test do
@@ -25,6 +27,7 @@ end
 
 group :test do
   gem 'database_cleaner', '1.2.0'
+  gem 'shoulda-matchers', '2.7.0', require: false
 end
 
 group :production do
