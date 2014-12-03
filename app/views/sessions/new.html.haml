@@ -1,8 +1,7 @@
 %section.sign_in.container
   .row
     .col-sm-10.col-sm-offset-1
-      = bootstrap_form_tag url: '/sign_in' do |f|
-        -#%form.sign_in
+      = bootstrap_form_tag url: sign_in_path do |f|
         %header
           %h1 Sign in
         = f.email_field :email, label: "Email Address", placeholder: 'name@example.com'
