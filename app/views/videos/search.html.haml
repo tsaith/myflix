@@ -3,4 +3,5 @@
     .li
       #{video.title}
     .li
-      = image_tag(video.cover_image_url, size: cover_image_size)
+      = link_to video_path(video) do
+        = image_tag(video.cover_image_url, size: cover_image_size)
