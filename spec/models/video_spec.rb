@@ -7,10 +7,9 @@ describe Video do
   it { should validate_presence_of :title }
   it { should validate_presence_of :description }
 
-
-  it 'generates a slug automatically before saving' do
-    ff1 = Video.create(title: "FFI", description: "Final Fantasy I")
-    expect(Video.all.last.slug).to eq ff1.slug
+  it "generating a slug automatically" do
+    video = Fabricate(:video, title: "FF")
+    expect(video.slug).to eq "ff"
   end
 
   describe '#search_by_title' do
@@ -20,16 +19,15 @@ describe Video do
     end
 
     it "returns an array of one video for an exact match" do
-      ff1 = Video.create(title: "FFI", description: "Final Fantasy I")
-      expect(Video.search_by_title('FFI')).to eq [ff1]
+      video = Fabricate(:video)
+      expect(Video.search_by_title(video.title)).to eq [video]
     end
+
     it "returns an array of one video for a partial match" do
-      ff1 = Video.create(title: "FFI", description: "Final Fantasy I")
-      ff2 = Video.create(title: "FFII", description: "Final Fantasy II")
-      expect(Video.search_by_title('FF')).to eq [ff2, ff1]
+      v1 = Fabricate(:video, title: "FFI")
+      v2 = Fabricate(:video, title: "FFII")
+      expect(Video.search_by_title('FF')).to include v2, v1
     end
-
-
   end
 
 end

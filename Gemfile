@@ -11,7 +11,9 @@ gem 'jquery-rails'
 gem 'pg'
 gem 'bootstrap_form', '2.2.0'
 gem 'bcrypt-ruby', '3.1.2'
-gem 'sluggable_th' # Set up slugs
+gem 'sluggable_th'
+gem 'fabrication', '2.11.3'
+gem 'faker', '1.4.3'
 
 group :development do
   gem 'thin'

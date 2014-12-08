@@ -5,6 +5,8 @@ Myflix::Application.routes.draw do
   get 'todo(/:action)', controller: 'todos'
 
   resources :videos, only: [:index, :show] do
+  #resources :videos do
+  #resources :videos, only: [:show] do
     collection do
       get 'search', to: 'videos#search'
     end
