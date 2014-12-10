@@ -2,6 +2,7 @@ class Video < ActiveRecord::Base
   include SluggableTh
 
   belongs_to :category
+  has_many :reviews, -> { order 'created_at DESC' }
 
   validates :title, presence: true, uniqueness: true
   validates :description, presence: true
@@ -11,6 +12,16 @@ class Video < ActiveRecord::Base
   def self.search_by_title(search_term)
     return [] if search_term.blank?
     where("title LIKE ?" , "%#{search_term}%").order("created_at DESC")
+  end
+
+  def rating
+    rating = 0
+    if reviews.count > 0
+      reviews.each do |review|
+        rating += review.rating
+      end
+      rating /= reviews.count
+    end
   end
 
 end

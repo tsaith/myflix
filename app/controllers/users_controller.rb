@@ -18,7 +18,7 @@ class UsersController < ApplicationController
       redirect_to home_path
     else
       flash[:error] = "There's something wrong during registration."
-      render 'new'
+      render :new
     end
   end
 
@@ -35,15 +35,15 @@ class UsersController < ApplicationController
 
   end
 
-  def destroy
-    if @user.destroy
-      session[:user_id] = nil
-      flash[:notice] = "You've been unregistered."
-      redirect_to root_path
-    else
-      render 'show'
-    end
-  end
+  # def destroy
+  #   if @user.destroy
+  #     session[:user_id] = nil
+  #     flash[:notice] = "You've been unregistered."
+  #     redirect_to home_path
+  #   else
+  #     render 'show'
+  #   end
+  # end
 
   private
 
