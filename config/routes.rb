@@ -22,5 +22,8 @@ Myflix::Application.routes.draw do
   get '/home', to: 'videos#index'
 
   resources :users, only: [:show, :create, :edit, :update]
+  resources :queue_items
+  get 'my_queue', to: 'queue_items#index'
+
 
 end

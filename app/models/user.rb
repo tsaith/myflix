@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   include SluggableTh
 
   has_many :reviews
+  has_many :queue_items, -> { order 'position ASC' }
 
   has_secure_password validations: false
 
