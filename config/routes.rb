@@ -5,11 +5,10 @@ Myflix::Application.routes.draw do
   get 'todo(/:action)', controller: 'todos'
 
   resources :videos, only: [:index, :show] do
-  #resources :videos do
-  #resources :videos, only: [:show] do
     collection do
       get 'search', to: 'videos#search'
     end
+    resources :reviews, only: [:create]
   end
 
   resources :categories
@@ -20,8 +19,8 @@ Myflix::Application.routes.draw do
 
   get '/sign_up', to: 'users#new'
 
-  resources :users, only: [:show, :create, :edit, :update]
+  get '/home', to: 'videos#index'
 
-  get '/home', to: 'categories#index'
+  resources :users, only: [:show, :create, :edit, :update]
 
 end
