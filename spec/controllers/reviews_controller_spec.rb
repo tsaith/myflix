@@ -33,7 +33,8 @@ describe ReviewsController do
           expect(Review.count).to eq 0
         end
         it "sets @reviews" do
-          review = Fabricate(:review, video: video)
+          user = Fabricate(:user)
+          review = Fabricate(:review, user: user, video: video)
           post :create, review: Fabricate.attributes_for(:review, content: nil), video_id: video.slug
           expect(assigns(:reviews)).to match_array [review]
         end
@@ -50,7 +51,7 @@ describe ReviewsController do
 
     context "with unauthenticated users" do
       it "redirects to the sign in page" do
-        post :create, review: Fabricate.attributes_for(:review), video_id: video.slug
+       post :create, review: Fabricate.attributes_for(:review), video_id: video.slug
         expect(response).to redirect_to sign_in_path
       end
     end

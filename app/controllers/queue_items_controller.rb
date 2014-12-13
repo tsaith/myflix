@@ -8,14 +8,21 @@ class QueueItemsController < ApplicationController
   end
 
   def create
-    @video = Video.find_by(slug: params[:video_id])
-    review = @video.reviews.build(review_params.merge!(user: current_user))
+    video = Video.find(params[:video_id])
+    queue_video(video)
+    redirect_to my_queue_path
 
-    if review.save
-      redirect_to @video
+  end
+
+  def destroy
+    queue_item = QueueItem.find(params[:id])
+
+    if queue_item.destroy
+      flash[:notice] = "You've removed the queue item"
+      redirect_to :back
     else
-      @reviews = @video.reviews.reload
-      render 'videos/show'
+      flash[:error] = "Failed to  removed the queue item"
+      redirect_to :back
     end
 
   end
@@ -28,6 +35,21 @@ class QueueItemsController < ApplicationController
 
   def set_queue_item
     @queue_item = QueueItem.find(params[:id])
+  end
+
+  def queue_video(video)
+    unless current_user_queued_video?(video)
+      QueueItem.create(user: current_user, video: video,
+                       position: new_queue_item_position)
+    end
+  end
+
+  def current_user_queued_video?(video)
+    current_user.queue_items.map(&:video).include?(video)
+  end
+
+  def new_queue_item_position
+    current_user.queue_items.count + 1
   end
 
 end

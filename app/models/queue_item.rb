@@ -4,6 +4,8 @@ class QueueItem < ActiveRecord::Base
 
   delegate :category, to: :video
 
+  validates :position, presence: true, uniqueness: true
+
   def video_title
     video.title
   end
