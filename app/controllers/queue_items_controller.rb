@@ -16,14 +16,18 @@ class QueueItemsController < ApplicationController
 
   def destroy
     queue_item = QueueItem.find(params[:id])
-
-    if queue_item.destroy
-      flash[:notice] = "You've removed the queue item"
-      redirect_to :back
-    else
-      flash[:error] = "Failed to  removed the queue item"
-      redirect_to :back
+    if current_user_has_queue_item?(queue_item)
+      queue_item.destroy
     end
+    redirect_to my_queue_path
+
+    # if queue_item.destroy
+    #   flash[:notice] = "You've removed the queue item"
+    #   redirect_to :back
+    # else
+    #   flash[:error] = "Failed to  removed the queue item"
+    #   redirect_to :back
+    # end
 
   end
 
@@ -50,6 +54,10 @@ class QueueItemsController < ApplicationController
 
   def new_queue_item_position
     current_user.queue_items.count + 1
+  end
+
+  def current_user_has_queue_item?(queue_item)
+    current_user.queue_items.include?(queue_item)
   end
 
 end
