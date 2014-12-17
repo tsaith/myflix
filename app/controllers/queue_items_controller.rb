@@ -18,17 +18,20 @@ class QueueItemsController < ApplicationController
     queue_item = QueueItem.find(params[:id])
     if current_user_has_queue_item?(queue_item)
       queue_item.destroy
+      QueueItem.normalize_queue_item_positions(current_user)
     end
     redirect_to my_queue_path
 
-    # if queue_item.destroy
-    #   flash[:notice] = "You've removed the queue item"
-    #   redirect_to :back
-    # else
-    #   flash[:error] = "Failed to  removed the queue item"
-    #   redirect_to :back
-    # end
+  end
 
+  def update_queue
+    begin
+      QueueItem.update_queue(params['queue_items'], current_user)
+      QueueItem.normalize_queue_item_positions(current_user)
+    rescue ActiveRecord::RecordInvalid
+      flash[:error] = "Invalid position numbers"
+    end
+    redirect_to my_queue_path
   end
 
   private

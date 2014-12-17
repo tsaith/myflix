@@ -5,8 +5,7 @@ describe QueueItem do
 
   it { is_expected.to belong_to :user }
   it { is_expected.to belong_to :video }
-  it { is_expected.to validate_presence_of :position }
-  it { is_expected.to validate_uniqueness_of :position }
+  it { is_expected.to validate_numericality_of(:position).only_integer}
 
   describe "#video_title" do
     it "returns the title of the associated video" do
