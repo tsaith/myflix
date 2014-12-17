@@ -17,4 +17,10 @@ class User < ActiveRecord::Base
     self.role.to_s == 'admin'
   end
 
+  def normalize_queue_item_positions
+    queue_items.each_with_index do |queue_item, index|
+      queue_item.update(position: index+1)
+    end
+  end
+
 end
