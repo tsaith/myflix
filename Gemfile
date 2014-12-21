@@ -32,6 +32,8 @@ end
 group :test do
   gem 'database_cleaner', '1.2.0'
   gem 'shoulda-matchers', '2.7.0', require: false
+  gem 'capybara', '2.4.4'
+  gem 'launchy', '2.4.3'
 end
 
 group :production do
