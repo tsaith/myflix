@@ -8,6 +8,7 @@
 
 
 thtsai = User.create(email: "thtsai@gmail.com", password: "password", full_name: "Tsung-Hua Tsai")
+alice = User.create(email: "alice@gmail.com", password: "password", full_name: "Alice Liddel")
 
 games = Category.create(name: "Games")
 movies = Category.create(name: "Movies")
@@ -29,5 +30,11 @@ Review.create(user: thtsai, video: ff8, rating:  (1..5).to_a.sample, content: Fa
 Review.create(user: thtsai, video: ff8, rating:  (1..5).to_a.sample, content: Faker::Lorem::paragraph)
 Review.create(user: thtsai, video: ff8, rating:  (1..5).to_a.sample, content: Faker::Lorem::paragraph)
 
+Review.create(user: alice, video: ff8, rating:  (1..5).to_a.sample, content: Faker::Lorem::paragraph)
+Review.create(user: alice, video: lucy, rating:  (1..5).to_a.sample, content: Faker::Lorem::paragraph)
+
 QueueItem.create(user: thtsai, video: ff8, position: 1)
 QueueItem.create(user: thtsai, video: lucy, position: 2)
+
+QueueItem.create(user: alice, video: ff8, position: 1)
+QueueItem.create(user: alice, video: lucy, position: 2)

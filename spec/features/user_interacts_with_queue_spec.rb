@@ -27,7 +27,6 @@ feature "User interacts with the queue" do
     expect_video_position(final_fantasy, 2)
     expect_video_position(dragon_quest, 3)
     expect_video_position(secret_garden, 1)
-
   end
 
   def add_video_to_queue(video)
@@ -46,7 +45,7 @@ feature "User interacts with the queue" do
   def add_video_to_queue(video)
     visit home_path
     find("a[href='/videos/#{video.slug}']").click
-    find("#add_my_queue").click
+    click_on "+ My Queue"
   end
 
   def set_video_position(video, position)
