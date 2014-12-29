@@ -4,6 +4,11 @@ class User < ActiveRecord::Base
   has_many :reviews
   has_many :queue_items, -> { order 'position ASC' }
 
+  has_many :relationships
+  has_many :following_relationships, class_name: 'Relationship', foreign_key: 'follower_id'
+  has_many :leading_relationships, class_name: 'Relationship', foreign_key: 'leader_id'
+  has_many :leaders, class_name: 'User', through: :relationships
+
   has_secure_password validations: false
 
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }, presence: true, uniqueness: true
@@ -27,4 +32,11 @@ class User < ActiveRecord::Base
     queue_items.map(&:video).include?(video)
   end
 
+  def follows?(another_user)
+    following_relationships.map(&:leader).include?(another_user)
+  end
+
+  def can_follow?(another_user)
+    !(self == another_user || self.follows?(another_user))
+  end
 end

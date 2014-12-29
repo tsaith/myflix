@@ -3,6 +3,12 @@ class ApplicationController < ActionController::Base
 
   helper_method :cover_image_size, :demo_image_size
   helper_method :current_user, :logged_in?
+  helper_method :current_user_has_followed?
+  helper_method :following_relationship
+
+  def following_relationship(leader)
+    Relationship.where(leader: leader, follower: current_user).first
+  end
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
