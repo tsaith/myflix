@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       flash[:notice] = "Your are registered."
       # Deliver welcome email
-      # UserMailer.welcome_email(@user).deliver
+      #AppMailer.send_welcome_email(@user).deliver
       redirect_to home_path
     else
       flash[:error] = "There's something wrong during registration."

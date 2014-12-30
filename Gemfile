@@ -21,6 +21,7 @@ group :development do
   gem "binding_of_caller"
   gem 'guard', '2.6.1'
   gem 'guard-livereload', '2.3.1'
+  gem 'letter_opener', '1.3.0'
 end
 
 group :development, :test do
