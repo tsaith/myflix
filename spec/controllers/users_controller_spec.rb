@@ -29,6 +29,7 @@ describe UsersController do
       before do
         post :create, user: Fabricate.attributes_for(:user)
       end
+      after { ActionMailer::Base.deliveries.clear }
 
       it "creates the user" do
         expect(User.count).to eq 1
@@ -42,6 +43,7 @@ describe UsersController do
       before do
         post :create, user: Fabricate.attributes_for(:user, password: "")
       end
+      after { ActionMailer::Base.deliveries.clear }
 
       it "does not create the user" do
         expect(User.count).to eq 0
@@ -75,8 +77,6 @@ describe UsersController do
       end
       it "does not send out email with invalid inputs" do
         post :create, user: { email: "alice@example.com" }
-        # This part may have bugs?
-        binding.pry if  ActionMailer::Base.deliveries.count > 0
         expect(ActionMailer::Base.deliveries).to be_empty
       end
     end
