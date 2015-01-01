@@ -6,4 +6,9 @@ class AppMailer < ActionMailer::Base
     mail(to: @user.email, subject: "Welcome to MyFlix!")
   end
 
+  def send_password_reset(user)
+    @user = user
+    mail(to: @user.email, subject: "Please reset your password")
+  end
+
 end

@@ -55,8 +55,8 @@ describe SessionsController do
     it "clears the session for the user" do
       expect(session[:user_id]).to be_nil
     end
-    it "redirects to the home page" do
-      expect(response).to redirect_to home_path
+    it "redirects to the sign in page" do
+      expect(response).to redirect_to sign_in_path
     end
     it "sets the notice" do
       expect(flash[:notice]).not_to be_blank

@@ -75,6 +75,8 @@ describe UsersController do
       end
       it "does not send out email with invalid inputs" do
         post :create, user: { email: "alice@example.com" }
+        # This part may have bugs?
+        binding.pry if  ActionMailer::Base.deliveries.count > 0
         expect(ActionMailer::Base.deliveries).to be_empty
       end
     end

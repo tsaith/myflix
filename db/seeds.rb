@@ -8,8 +8,8 @@
 
 
 thtsai = User.create(email: "tsai.tsunghua@gmail.com", password: "password", full_name: "Tsung-Hua Tsai")
-alice = User.create(email: "alice@gmail.com", password: "password", full_name: "Alice Liddel")
-tifa = User.create(email: "tifa@gmail.com", password: "password", full_name: "Tifa Lockhart")
+alice = User.create(email: "alice@example.com", password: "password", full_name: "Alice Liddel")
+tifa = User.create(email: "tifa@example.com", password: "password", full_name: "Tifa Lockhart")
 
 games = Category.create(name: "Games")
 movies = Category.create(name: "Movies")

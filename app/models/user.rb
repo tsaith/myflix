@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_secure_password validations: false
 
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }, presence: true, uniqueness: true
-  validates :password, presence: true, on: :create, length: {minimum: 5}
+  validates :password, presence: true, length: {minimum: 5}
   validates :full_name, presence: true
 
   sluggable_column :full_name
@@ -39,4 +39,13 @@ class User < ActiveRecord::Base
   def can_follow?(another_user)
     !(self == another_user || self.follows?(another_user))
   end
+
+  def generate_token!
+    self.update_column(:token, SecureRandom.urlsafe_base64)
+  end
+
+  def clear_token!
+    self.update_column(:token, nil)
+  end
+
 end

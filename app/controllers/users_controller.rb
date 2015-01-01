@@ -18,7 +18,6 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] = "Your are registered."
-      # Deliver welcome email
       AppMailer.send_welcome_email(@user).deliver
       redirect_to home_path
     else
