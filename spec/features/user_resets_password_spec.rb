@@ -11,7 +11,6 @@ feature "User resets password" do
     visit sign_in_path
     click_link "Forgot Password?"
 
-    visit forgot_password_path
     fill_in "Email Address", with: alice.email
     click_button "Send Email"
 
