@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   before_action :require_same_user, only: [:edit, :update]
 
-
   def show
   end
 
@@ -39,15 +38,15 @@ class UsersController < ApplicationController
 
   end
 
-  # def destroy
-  #   if @user.destroy
-  #     session[:user_id] = nil
-  #     flash[:notice] = "You've been unregistered."
-  #     redirect_to home_path
-  #   else
-  #     render 'show'
-  #   end
-  # end
+  def destroy
+    if @user.destroy
+      session[:user_id] = nil
+      flash[:notice] = "You've been unregistered."
+      redirect_to root_path
+    else
+      render 'show'
+    end
+  end
 
   private
 
