@@ -13,13 +13,14 @@ Myflix::Application.routes.draw do
 
   resources :categories
 
-  get '/sign_in', to: 'sessions#new'
-  post '/sign_in', to: 'sessions#create'
-  get '/sign_out', to: 'sessions#destroy'
+  get 'sign_in', to: 'sessions#new'
+  post 'sign_in', to: 'sessions#create'
+  get 'sign_out', to: 'sessions#destroy'
 
-  get '/sign_up', to: 'users#new'
+  get 'sign_up', to: 'users#new'
+  get 'sign_up/:token', to: 'users#new_with_invitation_token', as: 'sign_up_with_invitation_token'
 
-  get '/home', to: 'videos#index'
+  get 'home', to: 'videos#index'
 
   resources :users, only: [:show, :create, :edit, :update]
 
@@ -36,6 +37,8 @@ Myflix::Application.routes.draw do
 
   resources :password_resets, only: [:show, :create]
 
-  get 'expired_token', to: 'password_resets#expired_token'
+  get 'expired_token', to: 'pages#expired_token'
+
+  resources :invitations, only: [:new, :create]
 
 end

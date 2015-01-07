@@ -5,9 +5,12 @@
       = bootstrap_form_for @user do |f|
         %header
           %h1 Register
-        = f.email_field :email, label: "Email Address"
-        = f.password_field :password
-        = f.text_field :full_name, label: "Full Name"
+        .row
+          .col-sm-4
+            = f.email_field :email, label: "Email Address"
+            = f.password_field :password
+            = f.text_field :full_name, label: "Full Name"
+            = hidden_field_tag :invitation_token, @invitation_token
         = f.submit "Sign up"
         -# %fieldset.credit_card
         -#   .form-group

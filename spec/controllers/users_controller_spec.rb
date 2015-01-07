@@ -23,20 +23,66 @@ describe UsersController do
     end
   end
 
+  describe "GET new_with_invitation_token" do
+    it "renders the :new template" do
+      invitation = Fabricate(:invitation)
+      get :new_with_invitation_token, token: invitation.token
+      expect(response).to render_template :new
+    end
+    it "sets @user with recipient's email" do
+      invitation = Fabricate(:invitation)
+      get :new_with_invitation_token, token: invitation.token
+      expect(assigns(:user).email).to eq invitation.recipient_email
+    end
+    it "sets @invitation_token" do
+      invitation = Fabricate(:invitation)
+      get :new_with_invitation_token, token: invitation.token
+      expect(assigns(:invitation_token)).to eq invitation.token
+    end
+    it "redirects to the expired token page for invalid token" do
+      get :new_with_invitation_token, token: "invalid token"
+      expect(response).to redirect_to expired_token_path
+    end
+  end
+
   describe "POST create" do
 
     context "with valid input" do
-      before do
-        post :create, user: Fabricate.attributes_for(:user)
-      end
       after { ActionMailer::Base.deliveries.clear }
 
       it "creates the user" do
+        post :create, user: Fabricate.attributes_for(:user)
         expect(User.count).to eq 1
       end
+
       it "redirects to the home page" do
+        post :create, user: Fabricate.attributes_for(:user)
         expect(response).to redirect_to home_path
       end
+
+      it "makes the user follows the inviter" do
+        alice = Fabricate(:user)
+        invitation = Fabricate(:invitation, inviter: alice, recipient_email: "tifa@example.com")
+        post :create, user: { email: "tifa@example.com", password: "password", full_name: "Tifa Lockhart"}, invitation_token: invitation.token
+        tifa = User.last
+        expect(alice.follows?(tifa)).to be true
+      end
+
+      it "makes the inviter follows the user" do
+        alice = Fabricate(:user)
+        invitation = Fabricate(:invitation, inviter: alice, recipient_email: "tifa@example.com")
+        post :create, user: { email: "tifa@example.com", password: "password", full_name: "Tifa Lockhart"}, invitation_token: invitation.token
+        tifa = User.last
+        expect(tifa.follows?(alice)).to be true
+      end
+
+      it "expires the invitation upon acceptance" do
+        alice = Fabricate(:user)
+        invitation = Fabricate(:invitation, inviter: alice, recipient_email: "tifa@example.com")
+        post :create, user: { email: "tifa@example.com", password: "password", full_name: "Tifa Lockhart"}, invitation_token: invitation.token
+        expect(Invitation.first.token).to be nil
+      end
+
     end
 
     context "with invalid input" do

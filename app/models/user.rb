@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   has_secure_password validations: false
 
+  has_many :invitations, foreign_key: "inviter_id"
+
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }, presence: true, uniqueness: true
   validates :password, presence: true, length: {minimum: 5}
   validates :full_name, presence: true
@@ -30,6 +32,10 @@ class User < ActiveRecord::Base
 
   def queued_video?(video)
     queue_items.map(&:video).include?(video)
+  end
+
+  def follow(another_user)
+    following_relationships.create(leader: another_user) if can_follow?(another_user)
   end
 
   def follows?(another_user)

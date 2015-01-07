@@ -2,7 +2,7 @@ require 'spec_helper.rb'
 
 feature "User resets password" do
 
-  after { ActionMailer::Base.deliveries.clear }
+  after { clear_email }
 
   scenario "user sucessfully resets the password" do
 
