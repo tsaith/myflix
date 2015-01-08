@@ -14,7 +14,7 @@ class PasswordResetsController < ApplicationController
     if user
       user.password = params[:password]
       if user.save
-        user.clear_token!
+        user.clear_token
         flash[:success] = "Your password has been changed. Please sign in."
       else
         flash[:error] = "Invalid new password. Password did not change."

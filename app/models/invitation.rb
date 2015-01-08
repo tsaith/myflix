@@ -10,7 +10,7 @@ class Invitation < ActiveRecord::Base
   end
 
   def clear_token
-    self.token = nil
+    self.update_column(:token, nil)
   end
 
 end

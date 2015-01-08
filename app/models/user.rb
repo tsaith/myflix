@@ -46,11 +46,11 @@ class User < ActiveRecord::Base
     !(self == another_user || self.follows?(another_user))
   end
 
-  def generate_token!
+  def generate_token
     self.update_column(:token, SecureRandom.urlsafe_base64)
   end
 
-  def clear_token!
+  def clear_token
     self.update_column(:token, nil)
   end
 

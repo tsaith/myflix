@@ -69,19 +69,19 @@ describe User do
     end
   end
 
-  describe "#generate_token!" do
+  describe "#generate_token" do
     it "generate a random token" do
       alice = Fabricate(:user)
-      alice.generate_token!
+      alice.generate_token
       expect(User.first.token).not_to be_nil
     end
   end
 
-  describe "#clear_token!" do
+  describe "#clear_token" do
     it "clears the user's token" do
       alice = Fabricate(:user)
-      alice.generate_token!
-      alice.clear_token!
+      alice.generate_token
+      alice.clear_token
       expect(User.first.token).to be_nil
     end
   end

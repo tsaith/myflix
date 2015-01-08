@@ -82,7 +82,6 @@ class UsersController < ApplicationController
       @user.follow(invitation.inviter)
       invitation.inviter.follow(@user)
       invitation.clear_token
-      invitation.save
     end
   end
 end

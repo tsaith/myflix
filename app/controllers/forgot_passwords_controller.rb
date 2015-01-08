@@ -6,7 +6,7 @@ class ForgotPasswordsController < ApplicationController
     user = User.where(email: params[:email]).first
 
     if user
-      user.generate_token!
+      user.generate_token
       AppMailer.send_forgot_password_email(user).deliver
       redirect_to forgot_password_confirmation_path
     else

@@ -18,7 +18,8 @@ Myflix::Application.routes.draw do
   get 'sign_out', to: 'sessions#destroy'
 
   get 'sign_up', to: 'users#new'
-  get 'sign_up/:token', to: 'users#new_with_invitation_token', as: 'sign_up_with_invitation_token'
+  get 'sign_up/:token', to: 'users#new_with_invitation_token',
+                        as: 'sign_up_with_invitation_token'
 
   get 'home', to: 'videos#index'
 
