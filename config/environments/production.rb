@@ -18,19 +18,16 @@ Myflix::Application.configure do
 
   config.active_support.deprecation = :notify
 
-  # Delivery method of mailer
-  config.action_mailer.delivery_method = :smtp
+  # Mailer
   config.action_mailer.default_url_options = { :host => 'th-myflix.herokuapp.com' }
-
-  # Settings of the mailer
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    domain: "gmail.com",
-    authentication: "plain",
-    user_name: ENV['MYFLIX_SMTP_USER_NAME'],
-    password: ENV['MYFLIX_SMTP_PASSWORD'],
-    enable_starttls_auto: true
+    address: ENV['MAILGUN_SMTP_SERVER'],
+    port: ENV['MAILGUN_SMTP_PORT'],
+    user_name: ENV['MAILGUN_SMTP_LOGIN'],
+    password: ENV['MAILGUN_SMTP_PASSWORD'],
+    domain: 'th-myflix.herokuapp.com',
+    authentication: :plain,
   }
 
 end
