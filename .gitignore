@@ -14,12 +14,13 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-
-# Ignore all settings under environments 
-#config/environments/*.rb
-
-# Ignore temporary files 
 .*.swp
 *#
 .#*
 dump.rdb
+
+# Ignore all settings under environments 
+#config/environments/*.rb
+
+# Foreman env file
+.env

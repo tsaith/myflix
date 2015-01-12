@@ -15,6 +15,7 @@ gem 'sluggable_th', '0.0.0'
 gem 'fabrication', '2.11.3'
 gem 'faker', '1.4.3'
 gem 'sidekiq', '3.3.0'
+gem 'unicorn', '4.8.3'
 
 group :development do
   gem 'thin', '1.5.0'
