@@ -11,7 +11,7 @@ namespace :deploy do
   desc 'Deploy app in production environment'
   task :production do
     deployment = Paratrooper::Deploy.new("th-myflix") do |deploy|
-      deploy.tag              = 'production',
+      deploy.tag              = 'production'
       deploy.match_tag        = 'staging'
     end
 
