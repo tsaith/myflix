@@ -19,7 +19,6 @@ class User < ActiveRecord::Base
 
   sluggable_column :full_name
 
-
   def admin?
     self.role.to_s == 'admin'
   end

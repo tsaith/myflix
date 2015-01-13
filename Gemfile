@@ -41,7 +41,8 @@ group :test do
   gem 'rspec-sidekiq', '1.1.0'
 end
 
-group :production do
+group :production, :staging do
   gem 'rails_12factor', '0.0.2'
+  gem "sentry-raven", '0.12.2'
 end
 
