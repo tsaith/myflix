@@ -61,8 +61,8 @@ describe InvitationsController do
         expect(assigns(:invitation)).to be_new_record
         expect(assigns(:invitation)).to be_instance_of Invitation
       end
-      it "shows flash error messages" do
-        expect(flash[:error]).to be_present
+      it "shows flash danger messages" do
+        expect(flash[:danger]).to be_present
       end
 
       it "does not create an invitation" do

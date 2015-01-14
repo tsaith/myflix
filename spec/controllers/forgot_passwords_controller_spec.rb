@@ -8,9 +8,9 @@ describe ForgotPasswordsController do
         post :create, email: ""
         expect(response).to redirect_to forgot_password_path
       end
-      it "shows an error message" do
+      it "shows an danger message" do
         post :create, email: ""
-        expect(flash[:error]).to eq "Email cannot be blank."
+        expect(flash[:danger]).to eq "Email cannot be blank."
       end
     end
     context "with existing email" do
@@ -31,9 +31,9 @@ describe ForgotPasswordsController do
         post :create, email: "alice@example.com"
         expect(response).to redirect_to forgot_password_path
       end
-      it "shows an error message" do
+      it "shows an danger message" do
         post :create, email: "alice@example.com"
-        expect(flash[:error]).to eq "There is no user with that email in the system."
+        expect(flash[:danger]).to eq "There is no user with that email in the system."
       end
     end
   end

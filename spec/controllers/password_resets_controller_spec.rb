@@ -54,8 +54,8 @@ describe PasswordResetsController do
         it "redirects to the sign in page" do
           expect(response).to redirect_to sign_in_path
         end
-        it "sets the error message" do
-          expect(flash[:error]).to be_present
+        it "sets the danger message" do
+          expect(flash[:danger]).to be_present
         end
         it "does not change the user's password" do
           expect(User.first.authenticate("old_password")).to eq alice

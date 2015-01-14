@@ -14,7 +14,7 @@ class InvitationsController < ApplicationController
       redirect_to new_invitation_path
     else
       @invitation = Invitation.new
-      flash[:error] = "Failed to invite your friend."
+      flash[:danger] = "Failed to invite your friend."
       render :new
     end
   end
