@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
 
   def require_user
     unless logged_in?
-      flash[:error] = "You must sign in to do that"
+      flash[:danger] = "You must sign in to do that"
       redirect_to sign_in_path
     end
   end
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   end
 
   def access_denied
-    flash[:error] = "You can't do that."
+    flash[:danger] = "You can't do that."
     redirect_to root_path
   end
 

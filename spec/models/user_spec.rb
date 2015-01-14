@@ -6,7 +6,7 @@ describe User do
   it { is_expected.to have_many :reviews }
   it { is_expected.to have_many(:queue_items).order('position ASC') }
   it { is_expected.to validate_presence_of :email }
-  # This test will result in error, however, I don't know why?
+  # This test will result in error, need to figure it out
   #it { is_expected.to validate_uniqueness_of :email }
   it { is_expected.to validate_presence_of :password }
   it { is_expected.to validate_presence_of :full_name }

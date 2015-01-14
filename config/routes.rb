@@ -21,6 +21,15 @@ Myflix::Application.routes.draw do
   get 'sign_up/:token', to: 'users#new_with_invitation_token',
                         as: 'sign_up_with_invitation_token'
 
+  namespace :admin do
+    resources :videos do
+      collection do
+        get 'search', to: 'videos#search'
+      end
+      resources :reviews, only: [:create]
+    end
+  end
+
   get 'home', to: 'videos#index'
 
   resources :users, only: [:show, :create, :edit, :update]

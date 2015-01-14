@@ -19,9 +19,9 @@ class User < ActiveRecord::Base
 
   sluggable_column :full_name
 
-  def admin?
-    self.role.to_s == 'admin'
-  end
+  #def admin?
+  #  self.admin
+  #end
 
   def normalize_queue_item_positions
     queue_items.each_with_index do |queue_item, index|
