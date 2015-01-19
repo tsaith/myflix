@@ -24,3 +24,7 @@ dump.rdb
 
 # Foreman env file
 .env
+
+
+# Ignore application configuration
+/config/application.yml

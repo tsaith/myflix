@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  helper_method :cover_image_size, :demo_image_size
+  helper_method :small_cover_size, :large_cover_size
   helper_method :current_user, :logged_in?
   helper_method :current_user_has_followed?
   helper_method :following_relationship
@@ -34,11 +34,11 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
-  def cover_image_size
+  def small_cover_size
     "160x120"
   end
 
-  def demo_image_size
+  def large_cover_size
     "640x480"
   end
 

@@ -7,9 +7,9 @@ shared_examples "requires sign in" do
     expect(response).to redirect_to sign_in_path
   end
 
-  it "sets the flash error message" do
+  it "sets the flash danger message" do
     action
-    expect(flash[:error]).to be_present
+    expect(flash[:danger]).to be_present
   end
 
 end

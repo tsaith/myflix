@@ -55,6 +55,10 @@ describe UsersController do
         expect(User.count).to eq 1
       end
 
+      it "sets flash success message" do
+        expect(flash[:success]).to be_present
+      end
+
       it "redirects to the home page" do
         post :create, user: Fabricate.attributes_for(:user)
         expect(response).to redirect_to home_path
@@ -100,6 +104,9 @@ describe UsersController do
       end
       it "sets @user" do
         expect(assigns(:user)).to be_instance_of User
+      end
+      it "sets the flash danger message" do
+        expect(flash[:danger]).to be_present
       end
     end
 

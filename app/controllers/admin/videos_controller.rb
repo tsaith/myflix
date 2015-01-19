@@ -4,4 +4,8 @@ class Admin::VideosController < AdminsController
     @video = Video.new
   end
 
+  def create
+
+  end
+
 end

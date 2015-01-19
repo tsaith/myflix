@@ -17,6 +17,9 @@ gem 'faker', '1.4.3'
 gem 'sidekiq', '3.3.0'
 gem 'unicorn', '4.8.3'
 gem 'paratrooper', '2.4.1'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'figaro', '1.0.0'
+
 
 group :development do
   gem 'thin', '1.5.0'
