@@ -28,3 +28,7 @@ dump.rdb
 
 # Ignore application configuration
 /config/application.yml
+
+# Ignore files uploaded
+/public/uploads/*
+

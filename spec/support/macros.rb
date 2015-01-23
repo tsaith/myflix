@@ -10,6 +10,10 @@ def current_user
   User.find(session[:user_id])
 end
 
+def set_current_admin(user = nil)
+  session[:user_id] = ( user || Fabricate(:user, admin: true)).id
+end
+
 def sign_in(a_user = nil)
   user = a_user || Fabricate(:user)
   visit sign_in_path

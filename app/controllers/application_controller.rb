@@ -26,20 +26,27 @@ class ApplicationController < ActionController::Base
   end
 
   def require_admin
-    access_denied unless logged_in? && current_user.admin?
+    if logged_in?
+      unless current_user.admin?
+        flash[:danger] = "You are not an administrator."
+        redirect_to home_path
+      end
+    else
+      access_denied
+    end
   end
 
   def access_denied
-    flash[:danger] = "You can't do that."
+    flash[:danger] = "You have no right to do that."
     redirect_to root_path
   end
 
   def small_cover_size
-    "160x120"
+    "166x236"
   end
 
   def large_cover_size
-    "640x480"
+    "665x375"
   end
 
 end

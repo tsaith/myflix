@@ -3,6 +3,11 @@ require "spec_helper"
 describe VideosController do
 
   describe "GET index" do
+    it_behaves_like "requires sign in" do
+      video = Fabricate(:video)
+      let(:action) { get :show, id: video.slug }
+    end
+
     it "sets @categories for authenticated users" do
       set_current_user
       category = Fabricate(:category)
@@ -10,14 +15,15 @@ describe VideosController do
       expect(assigns(:categories)).to eq [category]
     end
 
+
+  end
+
+  describe "GET show" do
     it_behaves_like "requires sign in" do
       video = Fabricate(:video)
       let(:action) { get :show, id: video.slug }
     end
 
-  end
-
-  describe "GET show" do
     it "sets @video for authenticated user" do
       set_current_user
       video = Fabricate(:video)
@@ -33,10 +39,6 @@ describe VideosController do
       expect(assigns(:reviews)).to match_array [review1, review2]
     end
 
-    it_behaves_like "requires sign in" do
-      video = Fabricate(:video)
-      let(:action) { get :show, id: video.slug }
-    end
 
   end
 

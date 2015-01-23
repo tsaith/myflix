@@ -19,6 +19,9 @@ gem 'unicorn', '4.8.3'
 gem 'paratrooper', '2.4.1'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'figaro', '1.0.0'
+gem 'carrierwave', '0.10.0'
+gem 'mini_magick', '4.0.2'
+gem 'fog', '1.27.0'
 
 
 group :development do

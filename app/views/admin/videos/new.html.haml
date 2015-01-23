@@ -7,22 +7,15 @@
             %li
               %a(href="") Recent Payments
             %li.active
-              %a(href="") Add a New Video
+              = link_to "Add a New Video", new_admin_video_path
           %br
           %fieldset
             = f.text_field :title, control_col: "col-sm-3"
             = f.select :category_id, options_from_collection_for_select(Category.all, :id, :name)
             = f.text_area :description, rows: 8
-            .form-group
-              %label.control-label.col-sm-3 Large Cover
-              .col-sm-6
-                %col.btn.btn-file
-                  %input.form-control(type="file")
-            .form-group
-              %label.control-label.col-sm-3 Small Cover
-              .col-sm-6
-                %col.btn.btn-file
-                  %input.form-control(type="file")
+            = f.file_field :large_cover, class: "btn btn-default btn-file"
+            = f.file_field :small_cover, class: "btn btn-default btn-file"
+            = f.text_field :video_url, label: "Video URL"
           %fieldset.actions.form-group
             .col-sm-6.col-md-offset-3
               = f.submit "Add Video", class: "btn btn-default"
