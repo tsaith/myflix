@@ -21,8 +21,8 @@ Myflix::Application.configure do
     port: 587,
     domain: "gmail.com",
     authentication: "plain",
-    user_name: ENV['MYFLIX_SMTP_USER_NAME'],
-    password: ENV['MYFLIX_SMTP_PASSWORD'],
+    user_name: ENV['SMTP_USER_NAME'],
+    password: ENV['SMTP_PASSWORD'],
     enable_starttls_auto: true
   }
 
