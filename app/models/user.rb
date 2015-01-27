@@ -19,10 +19,6 @@ class User < ActiveRecord::Base
 
   sluggable_column :full_name
 
-  #def admin?
-  #  self.admin
-  #end
-
   def normalize_queue_item_positions
     queue_items.each_with_index do |queue_item, index|
       queue_item.update(position: index+1)

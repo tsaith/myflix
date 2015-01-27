@@ -4,7 +4,7 @@ feature "User invite friend" do
 
   after { clear_email }
 
-  scenario "user successfully invites a friend and invitation is accepted " do
+  scenario "user successfully invites a friend and invitation is accepted ", { js: true, vcr: true } do
     alice = Fabricate(:user)
     sign_in(alice)
 
@@ -32,11 +32,18 @@ feature "User invite friend" do
     fill_in "Email Address", with: "tifa@example.com"
     fill_in "Password", with: "password"
     fill_in "Full Name", with: "Tifa Lockhart"
+    fill_in "Credit Card Number", with: "4242424242424242"
+    fill_in "Security Code", with: "123"
+    select "4 - April", from: "date_month"
+    select "2019", from: "date_year"
     click_button "Sign up"
+    # An error occurs without this line, don't know why???
+    page.save_screenshot('tmp/screenshot.png')
   end
 
   def friend_signs_in
     visit sign_in_path
+
     fill_in "Email Address", with: "tifa@example.com"
     fill_in "Password", with: "password"
     click_button "Sign in"

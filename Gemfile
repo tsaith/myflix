@@ -46,6 +46,9 @@ group :test do
   gem 'capybara-email', '2.4.0'
   gem 'launchy', '2.4.3'
   gem 'rspec-sidekiq', '1.1.0'
+  gem 'vcr', '2.9.3'
+  gem 'webmock', '1.20.4'
+  gem 'selenium-webdriver', '2.44.0'
 end
 
 group :production, :staging do

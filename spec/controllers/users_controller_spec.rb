@@ -48,6 +48,7 @@ describe UsersController do
   describe "POST create" do
 
     context "with valid input" do
+      before { StripeWrapper::Charge.stub(:create) }
       after { ActionMailer::Base.deliveries.clear }
 
       it "creates the user" do
@@ -56,6 +57,7 @@ describe UsersController do
       end
 
       it "sets flash success message" do
+        post :create, user: Fabricate.attributes_for(:user)
         expect(flash[:success]).to be_present
       end
 
@@ -90,28 +92,31 @@ describe UsersController do
     end
 
     context "with invalid input" do
-      before do
-        post :create, user: Fabricate.attributes_for(:user, password: "")
-      end
+      before { StripeWrapper::Charge.stub(:create) }
       after { ActionMailer::Base.deliveries.clear }
 
       it "does not create the user" do
+        post :create, user: Fabricate.attributes_for(:user, password: "")
         expect(User.count).to eq 0
       end
       it "renders the :new template" do
+        post :create, user: Fabricate.attributes_for(:user, password: "")
         expect(response).to render_template :new
 
       end
       it "sets @user" do
+        post :create, user: Fabricate.attributes_for(:user, password: "")
         expect(assigns(:user)).to be_instance_of User
       end
       it "sets the flash danger message" do
+        post :create, user: Fabricate.attributes_for(:user, password: "")
         expect(flash[:danger]).to be_present
       end
     end
 
     context "sending emails" do
 
+      before { StripeWrapper::Charge.stub(:create) }
       after { ActionMailer::Base.deliveries.clear }
 
       it "sends out email to the user with valid inputs" do

@@ -19,16 +19,19 @@
 .#*
 dump.rdb
 
+
 # Ignore all settings under environments 
 #config/environments/*.rb
 
 # Foreman env file
 .env
 
-
 # Ignore application configuration
 /config/application.yml
 
 # Ignore files uploaded
 /public/uploads
+
+# Ignore VCR records
+/spec/cassettes
 

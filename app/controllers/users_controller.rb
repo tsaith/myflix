@@ -29,23 +29,17 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       handle_invitation
       AppMailer.delay.send_welcome_email(@user)
-      flash[:success] = "Your are registered."
 
       # Credit card transaction
-      Stripe.api_key = ENV['STRIPE_SECRET_KEY']
       token = params[:stripeToken]
-      begin
-        Stripe::Charge.create(
-          :amount => 999, # in cents
-          :currency => "usd",
-          :card => token,
-          :description => "Sign up for #{@user.email}"
-        )
-      rescue Stripe::CardError => e
-        # The card has been declined
-        flash[:danger] = e.message
-      end
+      StripeWrapper::Charge.create(
+        :amount => 999, # in cents
+        :currency => "usd",
+        :card => token,
+        :description => "Sign up for #{@user.email}"
+      )
 
+      flash[:success] = "Your are registered."
       redirect_to home_path
     else
       flash[:danger] = "There's something wrong during registration."

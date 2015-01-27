@@ -6,6 +6,17 @@ require 'capybara/rails'
 require 'capybara/email/rspec'
 require 'sidekiq/testing'
 Sidekiq::Testing.inline!
+require 'vcr'
+
+VCR.configure do |c|
+  c.cassette_library_dir = 'spec/cassettes'
+  c.hook_into :webmock
+  c.configure_rspec_metadata!
+  c.ignore_localhost = true
+  c.allow_http_connections_when_no_cassette = true
+end
+
+Capybara.server_port = 52662 # this line is required by Selenium
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -21,6 +32,11 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+
+  # so we can use :vcr rather than :vcr => true;
+  # in RSpec 3 this will no longer be necessary.
+  config.treat_symbols_as_metadata_keys_with_true_values = true
+
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
