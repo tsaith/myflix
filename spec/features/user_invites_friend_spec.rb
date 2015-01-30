@@ -37,8 +37,7 @@ feature "User invite friend" do
     select "4 - April", from: "date_month"
     select "2019", from: "date_year"
     click_button "Sign up"
-    # An error occurs without this line, don't know why???
-    page.save_screenshot('tmp/screenshot.png')
+    wait_for_friend_has_been_added
   end
 
   def friend_signs_in
@@ -61,4 +60,8 @@ feature "User invite friend" do
     expect(page).to have_content("Tifa Lockhart")
   end
 
+  def wait_for_friend_has_been_added
+    waiting_time = 1.5 # in seconds
+    sleep waiting_time unless User.count == 2
+  end
 end

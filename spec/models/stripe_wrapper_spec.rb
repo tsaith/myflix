@@ -1,9 +1,6 @@
 require 'spec_helper'
 
 describe StripeWrapper::Charge do
-  before do
-    StripeWrapper.set_api_key
-  end
 
   let(:token) do
     Stripe::Token.create(
@@ -12,7 +9,7 @@ describe StripeWrapper::Charge do
         :exp_month => 1,
         :exp_year => 2016,
         :cvc => "314",
-        :description => "paid by someone."
+        :description => "some description"
       }
     ).id
   end
