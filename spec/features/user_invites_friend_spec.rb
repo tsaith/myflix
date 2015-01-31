@@ -2,6 +2,11 @@ require 'spec_helper.rb'
 
 feature "User invite friend" do
 
+  background do
+    page.driver.allow_url("js.stripe.com")
+    page.driver.allow_url("api.stripe.com")
+    page.driver.allow_url("www.gravatar.com")
+  end
   after { clear_email }
 
   scenario "user successfully invites a friend and invitation is accepted ", { js: true, vcr: true } do
@@ -36,7 +41,7 @@ feature "User invite friend" do
     fill_in "Security Code", with: "123"
     select "4 - April", from: "date_month"
     select "2019", from: "date_year"
-    click_button "Sign up"
+    click_button "Sign Up"
     wait_for_friend_has_been_added
   end
 
@@ -61,7 +66,7 @@ feature "User invite friend" do
   end
 
   def wait_for_friend_has_been_added
-    waiting_time = 1.5 # in seconds
+    waiting_time = 3.5 # in seconds
     sleep waiting_time unless User.count == 2
   end
 end

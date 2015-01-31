@@ -35,4 +35,4 @@ Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
             .col-sm-2
               = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, class: 'form-control', data: {stripe: "exp-year"})
         = f.form_group do
-          = f.submit "Sign up"
+          = f.submit "Sign Up"

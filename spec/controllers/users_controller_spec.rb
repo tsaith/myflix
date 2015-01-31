@@ -60,12 +60,12 @@ describe UsersController do
       end
 
       it "sets flash success message" do
-        post :create, user: Fabricate.attributes_for(:user)
+        post :create, user: Fabricate.attributes_for(:user), stripeToken: "123"
         expect(flash[:success]).to be_present
       end
 
       it "redirects to the home page" do
-        post :create, user: Fabricate.attributes_for(:user)
+        post :create, user: Fabricate.attributes_for(:user), stripeToken: "123"
         expect(response).to redirect_to home_path
       end
 
