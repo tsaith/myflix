@@ -25,29 +25,40 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    if @user.valid?
-      # Credit card transaction
-      charge = StripeWrapper::Charge.create(
-        :amount => 999, # in cents
-        :currency => "usd",
-        :card => params[:stripeToken],
-        :description => "Sign up for #{@user.email}"
-      )
-      if charge.successful?
-        @user.save
-        session[:user_id] = @user.id
-        handle_invitation
-        AppMailer.delay.send_welcome_email(@user)
-        flash[:success] = "Thank you for registering with MyFlix."
-        redirect_to home_path
-      else
-        flash[:danger] = charge.error_message
-        render :new
-      end
+    result = UserSignup.new(@user).sign_up(params[:stripeToken], params[:invitation_token])
+
+    if result.successful?
+      session[:user_id] = @user.id
+      flash[:success] = "Thank you for registering with MyFlix."
+      redirect_to home_path
     else
-      flash[:danger] = "Invalid user information. Please check the errors below."
+      flash[:danger] = result.error_message
       render :new
     end
+
+    # if @user.valid?
+    #   # Credit card transaction
+    #   charge = StripeWrapper::Charge.create(
+    #     :amount => 999, # in cents
+    #     :currency => "usd",
+    #     :card => params[:stripeToken],
+    #     :description => "Sign up for #{@user.email}"
+    #   )
+    #   if charge.successful?
+    #     @user.save
+    #     session[:user_id] = @user.id
+    #     handle_invitation
+    #     AppMailer.delay.send_welcome_email(@user)
+    #     flash[:success] = "Thank you for registering with MyFlix."
+    #     redirect_to home_path
+    #   else
+    #     flash[:danger] = charge.error_message
+    #     render :new
+    #   end
+    # else
+    #   flash[:danger] = "Invalid user information. Please check the errors below."
+    #   render :new
+    # end
   end
 
   def edit
@@ -90,12 +101,12 @@ class UsersController < ApplicationController
     end
   end
 
-  def handle_invitation
-    invitation = Invitation.where(token: params[:invitation_token]).first
-    if invitation
-      @user.follow(invitation.inviter)
-      invitation.inviter.follow(@user)
-      invitation.clear_token
-    end
-  end
+  # def handle_invitation
+  #   invitation = Invitation.where(token: params[:invitation_token]).first
+  #   if invitation
+  #     @user.follow(invitation.inviter)
+  #     invitation.inviter.follow(@user)
+  #     invitation.clear_token
+  #   end
+  # end
 end

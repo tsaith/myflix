@@ -22,7 +22,7 @@ gem 'figaro', '1.0.0'
 gem 'carrierwave', '0.10.0'
 gem 'mini_magick', '4.0.2'
 gem 'fog', '1.27.0'
-
+gem 'draper'
 
 group :development do
   gem 'thin', '1.5.0'
@@ -49,7 +49,7 @@ group :test do
   gem 'vcr', '2.9.3'
   gem 'webmock', '1.20.4'
   gem 'selenium-webdriver', '2.44.0'
-  gem 'capybara-webkit'
+  gem 'capybara-webkit', '1.4.1'
 end
 
 group :production, :staging do

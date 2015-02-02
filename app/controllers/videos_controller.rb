@@ -18,7 +18,8 @@ class VideosController < ApplicationController
   private
 
   def set_video
-    @video = Video.find_by(slug: params[:id])
+    @video = Video.find_by(slug: params[:id]).decorate
+    #@video = Video.find_by(slug: params[:id])
   end
 
   def video_params
