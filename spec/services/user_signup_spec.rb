@@ -5,10 +5,10 @@ describe UserSignup do
   describe "#sign_up" do
 
     context "with valid personal info and valid card" do
-      let(:charge) { double(:charge, successful?: true) }
+      let(:customer) { double(:customer, successful?: true) }
 
       before do
-        StripeWrapper::Charge.should_receive(:create).and_return(charge)
+        StripeWrapper::Customer.should_receive(:create).and_return(customer)
       end
       after do
         ActionMailer::Base.deliveries.clear
@@ -68,9 +68,9 @@ describe UserSignup do
     end
 
     context "with valid personal info and declined card" do
-      let(:charge) { double(:charge, successful?: false, error_message: "Your card was declined." ) }
+      let(:customer) { double(:customer, successful?: false, error_message: "Your card was declined." ) }
       before do
-        StripeWrapper::Charge.should_receive(:create).and_return(charge)
+        StripeWrapper::Customer.should_receive(:create).and_return(customer)
       end
       after { ActionMailer::Base.deliveries.clear }
 
@@ -96,9 +96,9 @@ describe UserSignup do
         expect(User.count).to eq 0
       end
 
-      it "does not charge the card" do
+      it "does not customer the card" do
         alice = User.new(email: "alice@example.com")
-        StripeWrapper::Charge.should_not_receive(:create)
+        StripeWrapper::Customer.should_not_receive(:create)
         UserSignup.new(alice).sign_up("stripe token", nil)
         expect(User.count).to eq 0
       end
