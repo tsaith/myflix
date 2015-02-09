@@ -10,8 +10,7 @@ Myflix::Application.configure do
   config.assets.compress = true
   config.assets.js_compressor = :uglifier
 
-  config.assets.compile = true # this is required to run on Heroku
-  #config.assets.compile = false
+  config.assets.compile = false
 
   config.assets.digest = true
 
