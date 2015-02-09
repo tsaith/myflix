@@ -61,7 +61,7 @@ describe User do
     end
   end
 
-  describe "can_follow?" do
+  describe "#can_follow?" do
     it "returns true if the user does not have a following relationship with another user" do
       alice = Fabricate(:user)
       tifa = Fabricate(:user)
@@ -73,4 +73,19 @@ describe User do
     end
   end
 
+  describe "#activate!" do
+    it "activates a user" do
+      alice = Fabricate(:user, active: false)
+      alice.activate!
+      expect(alice).to be_active
+    end
+  end
+
+  describe "#deactivate!" do
+    it "deactivates a user" do
+      alice = Fabricate(:user, active: true)
+      alice.deactivate!
+      expect(alice).not_to be_active
+    end
+  end
 end

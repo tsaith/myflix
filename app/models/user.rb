@@ -49,4 +49,12 @@ class User < ActiveRecord::Base
     self.update_column(:token, nil)
   end
 
+  def activate!
+    self.update_column(:active, true)
+  end
+
+  def deactivate!
+    self.update_column(:active, false)
+  end
+
 end
