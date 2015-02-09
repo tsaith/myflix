@@ -55,7 +55,15 @@ describe StripeWrapper do
       )
       expect(response).to be_successful
     end
-    it "does not create a customer with declined card", :vcr do
+    it "returns the customer token with a valid card", :vcr do
+      alice = Fabricate(:user)
+      response = StripeWrapper::Customer.create(
+        user: alice,
+        card: valid_token
+      )
+      expect(response.customer_token).to be_present
+    end
+    it "does not create a customer with a declined card", :vcr do
       alice = Fabricate(:user)
       response = StripeWrapper::Customer.create(
         user: alice,
@@ -63,7 +71,7 @@ describe StripeWrapper do
       )
       expect(response).not_to be_successful
     end
-    it "returns the error message for declined card", :vcr do
+    it "returns the error message with a declined card", :vcr do
       alice = Fabricate(:user)
       response = StripeWrapper::Customer.create(
         user: alice,

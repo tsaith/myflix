@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   def require_admin
     if logged_in?
       unless current_user.admin?
-        flash[:danger] = "You are not an administrator."
+        flash[:danger] = "You are not authorized to do that."
         redirect_to home_path
       end
     else

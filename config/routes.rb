@@ -23,6 +23,7 @@ Myflix::Application.routes.draw do
 
   namespace :admin do
     resources :videos, only: [:new, :create]
+    resources :payments, only: [:index]
   end
 
   get 'home', to: 'videos#index'
@@ -46,4 +47,5 @@ Myflix::Application.routes.draw do
 
   resources :invitations, only: [:new, :create]
 
+  mount StripeEvent::Engine, at: '/stripe_events'
 end

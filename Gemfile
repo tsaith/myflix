@@ -23,6 +23,7 @@ gem 'carrierwave', '0.10.0'
 gem 'mini_magick', '4.0.2'
 gem 'fog', '1.27.0'
 gem 'draper', '1.4.0'
+gem 'stripe_event', '1.4.0'
 
 group :development do
   gem 'thin', '1.5.0'

@@ -5,7 +5,7 @@ describe UserSignup do
   describe "#sign_up" do
 
     context "with valid personal info and valid card" do
-      let(:customer) { double(:customer, successful?: true) }
+      let(:customer) { double(:customer, successful?: true, customer_token: "customer token") }
 
       before do
         StripeWrapper::Customer.should_receive(:create).and_return(customer)
@@ -64,6 +64,12 @@ describe UserSignup do
         UserSignup.new(alice).sign_up("stripe token", nil)
         message = ActionMailer::Base.deliveries.last
         expect(message.body).to include "Alice Liddel"
+      end
+
+      it "stores the customer token from stripe" do
+        alice = Fabricate.build(:user, full_name: "Alice Liddel")
+        UserSignup.new(alice).sign_up("stripe token", nil)
+        expect(User.first.customer_token).to eq "customer token"
       end
     end
 

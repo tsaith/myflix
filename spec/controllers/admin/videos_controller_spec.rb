@@ -41,7 +41,6 @@ describe Admin::VideosController do
         category = Fabricate(:category)
         post :create, video: { title: "Final Fantasy", category_id: category.id, description: "Best game ever!" }
         expect(Video.count).to eq 1
-        #expect(category.videos.count).to eq 1
       end
       it "redirects to the add new video page" do
         set_current_admin
