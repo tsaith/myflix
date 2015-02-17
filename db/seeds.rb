@@ -8,7 +8,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Users
-thtsai = User.create(email: "tsai.tsunghua@gmail.com", password: "password", full_name: "Tsung-Hua Tsai", admin: true)
+cloud = User.create(email: "cloud@example.com", password: "password", full_name: "Cloud Strife", admin: true)
 alice = User.create(email: "alice@example.com", password: "password", full_name: "Alice Liddel")
 tifa = User.create(email: "tifa@example.com", password: "password", full_name: "Tifa Lockhart")
 
@@ -34,19 +34,19 @@ lucy = create_video("Lucy", "A woman, accidentally caught in a dark deal, turns 
 iron_man_3 = create_video("Iron Man 3", "When Tony Stark's world is torn apart by a formidable terrorist called the Mandarin, he starts an odyssey of rebuilding and retribution.", movies, "https://farm8.staticflickr.com/7329/16333974866_71e2266c59_b.jpg", 'https://www.youtube.com/watch?v=Ke1Y3P9D0Bc')
 
 # Reviews
-Review.create(user: thtsai, video: ff13, rating:  (1..5).to_a.sample, content: Faker::Lorem::paragraph)
-Review.create(user: thtsai, video: ff12, rating:  (1..5).to_a.sample, content: Faker::Lorem::paragraph)
-Review.create(user: thtsai, video: ff11, rating:  (1..5).to_a.sample, content: Faker::Lorem::paragraph)
-Review.create(user: thtsai, video: three_idiots, rating:  (1..5).to_a.sample, content: Faker::Lorem::paragraph)
+Review.create(user: cloud, video: ff13, rating:  (1..5).to_a.sample, content: Faker::Lorem::paragraph)
+Review.create(user: cloud, video: ff12, rating:  (1..5).to_a.sample, content: Faker::Lorem::paragraph)
+Review.create(user: cloud, video: ff11, rating:  (1..5).to_a.sample, content: Faker::Lorem::paragraph)
+Review.create(user: cloud, video: three_idiots, rating:  (1..5).to_a.sample, content: Faker::Lorem::paragraph)
 
 Review.create(user: alice, video: ff13, rating:  (1..5).to_a.sample, content: Faker::Lorem::paragraph)
 Review.create(user: alice, video: lucy, rating:  (1..5).to_a.sample, content: Faker::Lorem::paragraph)
 Review.create(user: tifa, video: iron_man_3, rating:  (1..5).to_a.sample, content: Faker::Lorem::paragraph)
 
 # Queues
-QueueItem.create(user: thtsai, video: ff13, position: 1)
-QueueItem.create(user: thtsai, video: lucy, position: 2)
-QueueItem.create(user: thtsai, video: three_idiots, position: 3)
+QueueItem.create(user: cloud, video: ff13, position: 1)
+QueueItem.create(user: cloud, video: lucy, position: 2)
+QueueItem.create(user: cloud, video: three_idiots, position: 3)
 
 QueueItem.create(user: alice, video: ff13, position: 1)
 QueueItem.create(user: alice, video: lucy, position: 2)
@@ -57,7 +57,7 @@ QueueItem.create(user: tifa, video: lucy, position: 2)
 QueueItem.create(user: tifa, video: three_idiots, position: 3)
 
 # Following relationships
-Relationship.create(leader: thtsai, follower: alice)
-Relationship.create(leader: thtsai, follower: tifa)
-Relationship.create(leader: alice, follower: thtsai)
-Relationship.create(leader: tifa, follower: thtsai)
+Relationship.create(leader: cloud, follower: alice)
+Relationship.create(leader: cloud, follower: tifa)
+Relationship.create(leader: alice, follower: cloud)
+Relationship.create(leader: tifa, follower: cloud)

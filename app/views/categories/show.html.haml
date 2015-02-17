@@ -2,4 +2,4 @@
 %br
 - @category.videos.each do |video|
   = link_to video_path(video) do
-    = image_tag video.cover_image_url, size: cover_image_size
+    = image_tag video.small_cover_url, size: small_cover_size
