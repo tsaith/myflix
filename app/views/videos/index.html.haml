@@ -2,8 +2,11 @@
   - @categories.each do |category|
     .ul
       .li
-        = category.name
-        %br
+        %header
+          %h2
+            = category.name
         - category.recent_videos.each do |video|
           = link_to video_path(video) do
             = image_tag(video.small_cover, size: small_cover_size, id: "video-#{video.id}")
+        %br
+        %br

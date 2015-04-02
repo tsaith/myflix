@@ -1,7 +1,8 @@
 - @videos.each do |video|
   .video.ul
     .li
-      #{video.title}
+      %h2
+        #{video.title}
     .li
       = link_to video_path(video) do
         = image_tag(video.small_cover, size: small_cover_size)
